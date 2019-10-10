@@ -94,3 +94,15 @@ Since phrases can already contain commas using commas as separators in the data 
 ### Flash warning
 
 Some words have voice recordings. However, they use Flash so there's an alert. This messes with the css selectors used. So at the moment those are filtered out.
+
+### Unexpected parsing errors
+
+Parsing errors could happen in lots of unpredictable ways so I just decide to use `try...catch` and not handle the exception.
+
+## Further improvements
+
+- make parsing class
+  - initialize BeautifulSoup just once
+- better names in anonymous functions
+- remove imports no longer used
+  - reduce in parse
