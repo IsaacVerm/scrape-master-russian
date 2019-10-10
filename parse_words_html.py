@@ -1,4 +1,5 @@
 import bs4
+import re
 from functools import reduce
 
 
@@ -20,3 +21,14 @@ def clean_links_words(list_words):
 
 def flatten_links_words(list_words):
     return reduce(lambda page_a, page_b: page_a + page_b, list_words)
+
+
+def parse_russian_phrase(word):
+    soup = bs4.BeautifulSoup(word, 'html.parser')
+
+    phrases = soup.select('.phrase_plain .first')
+
+    try:
+        return list(map(lambda phrase: phrase.text, phrases))
+    except:
+        pass
