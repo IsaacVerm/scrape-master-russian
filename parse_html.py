@@ -9,10 +9,7 @@ def parse_urls_words(html_page):
 
     words = soup.select('.word a')
 
-    try:
-        return list(map(lambda x: x.attrs['href'], words))
-    except:
-        pass
+    return list(map(lambda x: x.attrs['href'], words))
 
 
 def parse_phrases(html_word):
@@ -22,9 +19,13 @@ def parse_phrases(html_word):
     russian = soup.select('.phrase_plain .first')
     english = soup.select('.phrase_plain .first + li')
 
-    try:
-        russian_translations = list(map(lambda element: element.text, russian))
-        english_translations = list(map(lambda element: element.text, english))
-        return list(zip(russian_translations, english_translations))
-    except:
-        pass
+    russian_translations = list(map(lambda element: element.text, russian))
+
+    # don't bother to continue if there's a flash warning
+    for translation in russian_translations:
+        if 'Adobe Flash Player' in translation:
+            russian_translations = ""
+
+    # continue if there's no warning
+    english_translations = list(map(lambda element: element.text, english))
+    return list(zip(russian_translations, english_translations))

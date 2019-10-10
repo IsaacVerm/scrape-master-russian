@@ -12,7 +12,4 @@ def get_html_page(page_number):
 
 def get_html_word(url):
     print(f"getting html for {url}")
-    try:
-        return get(url).content
-    except:
-        print(f"{url} is fishy")
+    return get(url).content

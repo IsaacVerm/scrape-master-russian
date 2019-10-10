@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ### Scraping
 
 ```
-python scrape_words.py
+python scrape.py
 ```
 
 ### Exploring the data
@@ -90,3 +90,7 @@ Getting the Russian part is [easy](http://masterrussian.com/vocabulary/god_year.
 ### Commas in output
 
 Since phrases can already contain commas using commas as separators in the data is not that handy. So instead of a csv I'll use a tsv. This has the added benefit of not having to specify a delimiter when going through the file with `cut`.
+
+### Flash warning
+
+Some words have voice recordings. However, they use Flash so there's an alert. This messes with the css selectors used. So at the moment those are filtered out.
