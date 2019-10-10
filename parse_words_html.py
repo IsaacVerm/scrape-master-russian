@@ -1,4 +1,5 @@
 import bs4
+from functools import reduce
 
 
 def parse_links_words(list_words):
@@ -6,6 +7,16 @@ def parse_links_words(list_words):
 
     words = soup.select('.word a')
 
-    links_words = list(map(lambda x: x.attrs['href'], words))
+    try:
+        return list(map(lambda x: x.attrs['href'], words))
+    except:
+        pass
 
-    return links_words
+
+# keep only valid results (sometimes the href is empty)
+def clean_links_words(list_words):
+    return list(filter(None, list_words))
+
+
+def flatten_links_words(list_words):
+    return reduce(lambda page_a, page_b: page_a + page_b, list_words)
