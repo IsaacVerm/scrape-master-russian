@@ -1,20 +1,18 @@
-from get_words_html import get_list_words, get_word
-from parse_words_html import parse_links_words, clean_links_words, flatten_links_words, parse_russian_phrase
+from get_html import get_html_page, get_html_word
+from parse_html import parse_urls_words, parse_phrases
+from write_to_file import write_phrases_to_tsv
 
-# get the htmls of all word lists
-page_numbers = list(range(8, 9))
+# get html page 1
+html_page = get_html_page(1)
 
-list_words = list(map(lambda x: get_list_words(x), page_numbers))
+# parse urls words
+urls_words = parse_urls_words(html_page)
 
-# parse the links for all words
-links_words = list(map(lambda x: parse_links_words(x), list_words))
+# get html first word
+html_word = get_html_word(urls_words[0])
 
-# clean and flatten
-links_words = flatten_links_words(clean_links_words(links_words))
+# parse phrases first word
+phrases = parse_phrases(html_word)
 
-# get the htmls of all words
-words = list(map(lambda url: get_word(url), links_words))
-
-# parse example phrases
-russian_phrases = list(map(lambda word: parse_russian_phrase(word), words))
-print(russian_phrases)
+# write phrases to file
+write_phrases_to_tsv(phrases)
