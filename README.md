@@ -5,7 +5,7 @@
 Create Python3 [virtual environment](https://docs.python.org/3/tutorial/venv.html):
 
 ```
-python3 -m venv tutorial-env
+python3 -m venv venv
 ```
 
 Activate the virtual environment just created:
