@@ -1,5 +1,7 @@
 from requests import get
 
+def get_page_numbers():
+    return list(range(1, 13))
 
 def get_html_page(page_number):
     print(f"getting html page {page_number}")
