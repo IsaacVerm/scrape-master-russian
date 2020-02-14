@@ -1,6 +1,6 @@
-from get_html import get_html_page, get_html_word
-from parse_html import parse_urls_words, parse_phrases
-from write_to_file import write_phrases_to_tsv, write_phrases_header_to_tsv
+from src.get_html import get_html_page, get_html_word
+from src.parse_html import parse_urls_words, parse_phrases
+from src.write_to_file import write_phrases_to_tsv, write_phrases_header_to_tsv
 
 # define pages with words
 page_numbers = list(range(1, 13))
