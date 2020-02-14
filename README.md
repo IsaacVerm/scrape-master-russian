@@ -20,16 +20,15 @@ Install libraries specified in `requirements.txt`:
 pip install -r requirements.txt
 ```
 
+## Scraping
 
-## Running the code
-
-### Scraping
+Scraping files are available in scrape folder. Run them using:
 
 ```
-python scrape.py
+python {file}.py
 ```
 
-### Exploring the data
+## Exploring the data
 
 Printing a Russian phrase (`-f2`) on a specific line (for example line 5 is `NR==5`):
 
@@ -53,11 +52,39 @@ cat phrases.tsv
 
 [Master Russian](http://masterrussian.com/vocabulary/most_common_words.htm) has a list of the 1000 most common words in Russian. According to [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law) _the frequency of any word is inversely proportional to its rank in the frequency table_. So by learning the most common words we should learn the most.
 
-## How to scrape
+## Logic
 
-The words are divided in pages of unequal length. Each page contains the links to individual words. Each word contains example phrases.
+### Types of pages
 
-So this is the order of execution:
+The Master Russian site consists of 2 types of pages:
+
+- words
+- phrases
+
+The word pages contain:
+
+- rank
+- Russian word
+- English translation
+- type
+
+Each word page contains links to the example phrases. We only focus on the Russian word and its English translation.
+
+The phrases pages contain several example phrases for each word.
+
+### Order of execution
+
+The scraping for words is the easiest:
+
+```
+- get html page 1
+    - parse word and translation
+    - write word with translation to file
+- get html page 2
+    ...
+```
+
+The scraping for phrases is a bit more involved:
 
 ```
 - get html page 1
@@ -71,15 +98,15 @@ So this is the order of execution:
     ...
 ```
 
-The code is divided into parts:
+The scraping of phrases overlaps for a large part with the scraping of words so we can reuse the same functions.
+
+The code for both words and phrases is divided into the following parts:
 
 - get html
 - parse html
 - write csv
 
 The approach is not to first get all the htmls, then parse, etc... but to write to file as soon as possible.
-
-Logging is done with `print` statements.
 
 ## Issues
 
