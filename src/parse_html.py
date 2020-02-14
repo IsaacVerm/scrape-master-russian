@@ -12,6 +12,20 @@ def parse_urls_words(html_page):
     return list(map(lambda x: x.attrs['href'], words))
 
 
+def parse_words(html_page):
+    print("parsing words from html page")
+
+    soup = bs4.BeautifulSoup(html_page, 'html.parser')
+
+    russian = soup.select('.word')
+    english = soup.select('.word + td')
+
+    russian_text = list(map(lambda word: word.text, russian))
+    english_text = list(map(lambda word: word.text, english))
+
+    return list(zip(russian_text, english_text))
+
+
 def parse_phrases(html_word):
     print("parsing phrases from html word")
     soup = bs4.BeautifulSoup(html_word, 'html.parser')
